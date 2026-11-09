@@ -1,0 +1,16 @@
+name: Feature suggestion
+description: Suggest a usability or game improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What would you like changed?
+      description: Explain the player problem and the behavior you propose.
+    validations:
+      required: true
+  - type: textarea
+    id: boardgame
+    attributes:
+      label: Relationship to the physical board-game rules
+      description: If relevant, is this new behavior or a clarification of a printed rule?

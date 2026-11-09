@@ -1,0 +1,44 @@
+name: Bug report
+description: Report something that doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting a Feirmeoir issue. Please avoid attaching private browser data.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: For example, v0.1.0
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: edition
+    attributes:
+      label: Edition
+      options:
+        - GitHub Pages / hosted web version
+        - Offline Feirmeoir.html
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and operating system
+      placeholder: e.g. Firefox on Windows 11
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: What did you do, and how many families were in the game?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual result
+    validations:
+      required: true

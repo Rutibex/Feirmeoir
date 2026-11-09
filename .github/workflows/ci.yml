@@ -1,0 +1,37 @@
+name: Verify Feirmeoir
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-and-package:
+    name: Rules, assets, and offline package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rules tests
+        run: node tests/rules.test.cjs
+      - name: Verify card and image assets
+        run: python tools/verify_assets.py
+      - name: Build distributable offline edition
+        run: python tools/build_offline.py --zip
+      - name: Verify offline archive
+        run: python tools/verify_assets.py --offline build/Feirmeoir.html
+      - name: Upload offline download as CI artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Feirmeoir-offline
+          path: build/Feirmeoir-v0.1.0-Offline.zip
+          if-no-files-found: error
